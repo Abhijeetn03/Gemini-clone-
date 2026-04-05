@@ -6,6 +6,13 @@ import Context from '../../../context/context'
 const Main = () => {
   const { onSent, recentprompts, showresults, loading, setInput, resultdata, input } = useContext(Context)
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && !loading) {
+      event.preventDefault()
+      onSent()
+    }
+  }
+
   return (
     <div className='main'>
       <div className='nav'>
@@ -65,6 +72,7 @@ const Main = () => {
               placeholder="Enter a prompt..."
               value={input}
               onChange={(event) => setInput(event.target.value)}
+              onKeyDown={handleKeyDown}
             />
             <div className="search-box-actions">
               <img src={assets.gallery_icon} alt="Gallery" />
